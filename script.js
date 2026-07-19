@@ -1,0 +1,1 @@
+function analyzeDraw(){let t=document.getElementById('numbers').value;document.getElementById('results').innerHTML='<b>Numbers:</b><br>'+t;}
