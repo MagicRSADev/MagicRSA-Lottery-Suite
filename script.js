@@ -42,9 +42,46 @@ function analyzeDraw() {
 
         results += "✅ VALID DRAW<br><br>";
 
-        results += "Winning Numbers:<br>";
+unique.sort((a,b)=>a-b);
 
-        results += unique.sort((a,b)=>a-b).join(", ");
+results += "<b>Winning Numbers</b><br>";
+results += unique.join(", ");
+results += "<hr>";
+
+let analysis = [];
+
+// Compare each group
+MASTER_WHEEL.forEach((group, index) => {
+
+    let matches = group.filter(number => unique.includes(number));
+
+    analysis.push({
+        group: index + 1,
+        matches: matches.length,
+        numbers: matches
+    });
+
+});
+
+// Sort from highest matches
+analysis.sort((a,b)=>b.matches-a.matches);
+
+results += "<h3>Top Matching Groups</h3>";
+
+analysis.forEach(item=>{
+
+    results +=
+    "<p><b>Group "+
+    item.group+
+    "</b> — "+
+    item.matches+
+    "/7 matches<br>"+
+    item.numbers.join(", ")+
+    "</p>";
+
+});
+
+document.getElementById("results").innerHTML = results;
 
     }
 
