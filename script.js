@@ -66,25 +66,42 @@ MASTER_WHEEL.forEach((group, index) => {
 // Sort from highest matches
 analysis.sort((a,b)=>b.matches-a.matches);
 
-results += "<h3>Top Matching Groups</h3>";
+results += "<h3>🏆 Top 10 Matching Groups</h3>";
 
-analysis.forEach(item=>{
+results += `
+<table class="results-table">
+<tr>
+<th>Rank</th>
+<th>Group</th>
+<th>Matches</th>
+<th>Numbers</th>
+</tr>
+`;
 
-    results +=
-    "<p><b>Group "+
-    item.group+
-    "</b> — "+
-    item.matches+
-    "/7 matches<br>"+
-    item.numbers.join(", ")+
-    "</p>";
+analysis.slice(0,10).forEach((item,index)=>{
+
+let medal = "";
+
+if(index===0) medal="🥇";
+else if(index===1) medal="🥈";
+else if(index===2) medal="🥉";
+else medal=index+1;
+
+results += `
+<tr>
+<td>${medal}</td>
+<td>${item.group}</td>
+<td>${item.matches}/7</td>
+<td>${item.numbers.join(", ")}</td>
+</tr>
+`;
 
 });
+
+results += "</table>";
 
 document.getElementById("results").innerHTML = results;
 
     }
 
-    document.getElementById("results").innerHTML = results;
-
-}
+    
